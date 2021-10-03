@@ -5,11 +5,13 @@ import MyGUI from "../utils/MyGUI"
 import specFrag from "../shaders/spec.frag"
 import specVert from "../shaders/spec.vert"
 
+import LoadingController from "./LoadingController"
+
 class SpecClass {
   constructor() {
     this.bind()
-    this.modelLoader = new GLTFLoader()
-    this.textureLoader = new THREE.TextureLoader()
+    this.modelLoader = new GLTFLoader(LoadingController)
+    this.textureLoader = new THREE.TextureLoader(LoadingController)
   }
 
   init(scene) {
@@ -20,16 +22,22 @@ class SpecClass {
         value: this.textureLoader.load("assets/textures/1.png"),
       },
       uSpecSize: {
-        value: 0.6,
+        value: 0.25,
       },
       uWaveBorder: {
-        value: 0.4,
-      },
-      uWaveSpeed: {
         value: 0.1,
       },
+      uWaveStep: {
+        value: 3,
+      },
+      uWaveSpeed: {
+        value: 0.25,
+      },
+      uWaveNoise: {
+        value: 0.7,
+      },
       uBorderColor: {
-        value: new THREE.Color("hsl(250, 80%, 80%)"),
+        value: new THREE.Color("#009999"),
       },
       uTime: {
         value: 0,
@@ -42,6 +50,8 @@ class SpecClass {
     shaderFolder
       .add(this.uniforms.uWaveBorder, "value", 0, 1)
       .name("uWaveBorder")
+    shaderFolder.add(this.uniforms.uWaveNoise, "value", 0, 1).name("uWaveNoise")
+    shaderFolder.add(this.uniforms.uWaveStep, "value", 0, 10).name("uWaveStep")
     shaderFolder.add(this.uniforms.uWaveSpeed, "value", 0, 1).name("uWaveSpeed")
     // shaderFolder
     //   .add(this.uniforms.uBorderColor, "value", 0, 1)

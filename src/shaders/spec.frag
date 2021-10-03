@@ -9,14 +9,16 @@ uniform sampler2D uMatCap;
 uniform float uSpecSize;
 uniform float uWaveBorder;
 uniform float uWaveSpeed;
+uniform float uWaveStep;
+uniform float uWaveNoise;
 uniform vec3 uBorderColor;
 uniform float uTime;
 
 void main() {
 
-    float n3 = snoise3(vec3(vPosition.xz*5., uTime*0.01))*.5;
+    float n3 = snoise3(vec3(vPosition.xy*10., uTime*0.5))*uWaveNoise;
 
-    float w = sin(vPosition.y*10. + -uTime*uWaveSpeed);
+    float w = sin(vPosition.y*uWaveStep + -uTime*uWaveSpeed);
 
     float borderMask = step(w, n3-uSpecSize);
     borderMask -= step(w, n3-(uSpecSize+uWaveBorder));
@@ -27,7 +29,7 @@ void main() {
     vec4 matCap = texture2D(uMatCap, vMatCapUV);
     vec4 matCapOut = vec4(matCap.rgb, mcMask);
 
-    float opMask = 1.-vPosition.y;
+    float opMask = 0. - vPosition.y;
     opMask *= .15;
     opMask += .5;
     vec4 opMaskOut = vec4(1., 1., 1., opMask);
