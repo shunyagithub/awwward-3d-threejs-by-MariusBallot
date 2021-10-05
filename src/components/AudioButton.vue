@@ -5,8 +5,9 @@
     <div class="song">
       MUSIC:
       <a
-        href="http://NCS.io/FeelAlive
-Watch: http://youtu.be/VVEssTuPj6g"
+        href="http://youtu.be/VVEssTuPj6g"
+        target="_blank"
+        rel="noopener noreferrer"
         >Song: More Plastic x hayve - Feel Alive</a
       >
     </div>
