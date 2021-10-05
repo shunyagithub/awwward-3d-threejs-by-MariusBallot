@@ -2,6 +2,8 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
 import * as THREE from "three"
 import MyGUI from "../utils/MyGUI"
 
+import SoundReactor from "./SoundReactor"
+
 import LoadingController from "./LoadingController"
 
 class SphirePillardClass {
@@ -45,7 +47,7 @@ class SphirePillardClass {
 
     const sphereFolder = MyGUI.addFolder("Sphere Pillards")
     sphereFolder.open()
-    sphereFolder.add(this.params, "waveSpeed", 0.001, 3).name("Wave Speed")
+    sphereFolder.add(this.params, "waveSpeed", 0.001, 3).name("Pillards Speed")
     sphereFolder
       .add(this.params, "subDiv", 1, 5)
       .step(1)
@@ -59,7 +61,9 @@ class SphirePillardClass {
 
   computePositions() {
     // this.scene.add(this.pillard)
+    this.sphere
     let ico
+
     this.scene.traverse((child) => {
       if (child.name == "ico") {
         ico = child
@@ -70,15 +74,15 @@ class SphirePillardClass {
 
     const sphereGeom = new THREE.IcosahedronGeometry(2, this.params.subDiv)
     const sphereMat = this.gMatCap
-    const sphere = new THREE.Mesh(
+    this.sphere = new THREE.Mesh(
       sphereGeom,
       sphereMat
       // new THREE.MeshNormalMaterial({
       //   // wireframe: true,
       // })
     )
-    sphere.name = "ico"
-    this.scene.add(sphere)
+    this.sphere.name = "ico"
+    this.scene.add(this.sphere)
 
     this.pillards.clear()
 
@@ -129,18 +133,33 @@ class SphirePillardClass {
   }
 
   update() {
-    let i = 0
-    while (i < this.pillards.children.length) {
-      this.pillards.children[i].children[0].position.y =
-        Math.sin(
-          Date.now() * 0.01 * this.params.waveSpeed +
-            this.pillards.children[i].position.x * 1.5
-        ) + 1
-      i++
+    if (SoundReactor.playFlag) {
+      let i = 0
+      while (i < this.pillards.children.length) {
+        this.pillards.children[i].children[0].position.y =
+          -Math.sin((SoundReactor.fdata[i] / 255) * 5) * 5 + 5
+
+        i++
+      }
+      const range = 50
+      this.sphere.scale.x = SoundReactor.fdata[range] / 255
+      this.sphere.scale.y = SoundReactor.fdata[range] / 255
+      this.sphere.scale.z = SoundReactor.fdata[range] / 255
+    } else {
+      let i = 0
+      while (i < this.pillards.children.length) {
+        this.pillards.children[i].children[0].position.y =
+          Math.sin(
+            Date.now() * 0.01 * this.params.waveSpeed +
+              this.pillards.children[i].position.x * 1.5
+          ) + 1
+        i++
+      }
     }
-    this.pillards.rotation.x = Date.now() * 0.0001
-    this.pillards.rotation.y = Date.now() * 0.0001
-    this.pillards.rotation.z = Date.now() * 0.0001
+
+    this.pillards.rotation.x = Date.now() * 0.0005
+    this.pillards.rotation.y = Date.now() * 0.0005
+    this.pillards.rotation.z = Date.now() * 0.0005
   }
   bind() {
     this.computePositions = this.computePositions.bind(this)

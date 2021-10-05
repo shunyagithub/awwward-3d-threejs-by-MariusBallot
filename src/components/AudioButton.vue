@@ -1,0 +1,87 @@
+<template>
+  <div class="audioButton">
+    <button v-if="!playFlag" @click="onPlay()">PLAY</button>
+    <button class="pauseButton" v-else @click="onPause()">PAUSE</button>
+    <div class="song">
+      MUSIC:
+      <a
+        href="http://NCS.io/FeelAlive
+Watch: http://youtu.be/VVEssTuPj6g"
+        >Song: More Plastic x hayve - Feel Alive</a
+      >
+    </div>
+  </div>
+</template>
+
+<script>
+import SoundReactor from "../classes/SoundReactor"
+import MainThreeScene from "@/classes/MainThreeScene"
+
+export default {
+  name: "AudioButton",
+  data() {
+    return {
+      initFlag: false,
+      playFlag: false,
+    }
+  },
+  methods: {
+    onPlay() {
+      if (!this.initFlag) {
+        this.initFlag = true
+        SoundReactor.init()
+      }
+
+      SoundReactor.play()
+      this.playFlag = true
+    },
+    onPause() {
+      SoundReactor.pause()
+      this.playFlag = false
+    },
+  },
+}
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped lang="stylus">
+.audioButton {
+    position: absolute;
+    top: 90%;
+    left: 5%;
+
+    .song{
+      color: white;
+      font-size: 0.6em;
+      margin-top: 3px;
+      a{
+        color: inherit;
+      }
+    }
+
+    button {
+        cursor: pointer;
+        border-radius: 5px;
+        border 1px solid #fff;
+        background: rgba(30, 30, 30, 5%);
+        padding: 10px;
+        width: 80px;
+        color: white;
+        transition: background .1s ease-in-out;
+
+        &:hover{
+          background: rgba(30, 30, 30, 30%);
+        }
+
+    }
+
+      .pauseButton{
+        color: #000;
+        background #fff;
+
+        &:hover{
+          background: #f2f3f4;
+        }
+      }
+}
+</style>

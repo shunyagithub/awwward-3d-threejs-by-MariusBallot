@@ -17,6 +17,10 @@ class SpecClass {
   init(scene) {
     this.scene = scene
 
+    const waveColor = {
+      color: "#15dddd",
+    }
+
     this.uniforms = {
       uMatCap: {
         value: this.textureLoader.load("assets/textures/1.png"),
@@ -37,7 +41,7 @@ class SpecClass {
         value: 0.7,
       },
       uBorderColor: {
-        value: new THREE.Color("#009999"),
+        value: new THREE.Color(waveColor.color),
       },
       uTime: {
         value: 0,
@@ -53,9 +57,10 @@ class SpecClass {
     shaderFolder.add(this.uniforms.uWaveNoise, "value", 0, 1).name("uWaveNoise")
     shaderFolder.add(this.uniforms.uWaveStep, "value", 0, 10).name("uWaveStep")
     shaderFolder.add(this.uniforms.uWaveSpeed, "value", 0, 1).name("uWaveSpeed")
-    // shaderFolder
-    //   .add(this.uniforms.uBorderColor, "value", 0, 1)
-    //   .name("uBorderColor")
+    shaderFolder
+      .addColor(waveColor, "color")
+      .name("uWaveColor")
+      .onChange(() => this.uniforms.uBorderColor.value.set(waveColor.color))
 
     this.shaderMat = new THREE.ShaderMaterial({
       fragmentShader: specFrag,

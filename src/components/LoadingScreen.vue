@@ -1,5 +1,12 @@
 <template>
-  <div class="loadingScreen" ref="loadingScreen">Loading: {{ progress }}%</div>
+  <div class="loadingScreen" ref="loadingScreen">
+    <div class="loadingBarBox">
+      <div class="loadingBar" ref="loadingBar">
+        <span class="loadingPer">{{ Math.floor(progress) }}%</span>
+      </div>
+      <div class="loadingText">Loading: {{ text }}</div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -10,6 +17,7 @@ export default {
   data() {
     return {
       progress: 0,
+      text: "",
     }
   },
   mounted() {
@@ -19,9 +27,13 @@ export default {
   methods: {
     onProgress(url, loaded, total) {
       this.progress = (loaded / total) * 100
+      this.$refs.loadingBar.style.width = `${(loaded / total) * 100}%`
+      this.text = url
     },
     onLoad() {
-      this.$refs.loadingScreen.classList.add("finished")
+      setTimeout(() => {
+        this.$refs.loadingScreen.classList.add("finished")
+      }, 500)
     },
   },
 }
@@ -37,9 +49,38 @@ export default {
     top: 0;
     left: 0;
     z-index: 2;
-    color: white;
-    font-size : 2em;
-    transition: all .5s;
+
+    transition: all 0.5s ease-in;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .loadingBarBox{
+      width: 300px;
+      height: 20px;
+      background #000;
+
+      .loadingBar{
+        position: relative;
+        width: 10%;
+        height: 100%;
+        background: #ccc;
+        border-radius: 2px;
+
+        .loadingPer{
+          position absolute;
+          right: 2px;
+          top: 2px;
+          color: #000;
+          font-size: 0.7em;
+        }
+      }
+
+      .loadingText{
+        color: #ccc;
+        font-size: 0.5em;
+      }
+    }
 
     &.finished{
         opacity : 0;

@@ -46,7 +46,7 @@ class MainThreeScene {
       0.1,
       1000
     )
-    this.camera.position.set(0, 0, 8)
+    this.camera.position.set(0, 0, 6)
     this.controls = new OrbitControls(this.camera, this.renderer.domElement)
     // this.controls.enabled = config.controls
     this.controls.enabled = false
