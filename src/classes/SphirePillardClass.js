@@ -137,7 +137,7 @@ class SphirePillardClass {
       let i = 0
       while (i < this.pillards.children.length) {
         this.pillards.children[i].children[0].position.y =
-          -Math.sin((SoundReactor.fdata[i] / 255) * 5) * 5 + 5
+          Math.sin((SoundReactor.fdata[i] / 255) * 10) * 2 + 2
 
         i++
       }
@@ -155,6 +155,7 @@ class SphirePillardClass {
           ) + 1
         i++
       }
+      this.sphere.scale.x = this.sphere.scale.y = this.sphere.scale.z = 1
     }
 
     this.pillards.rotation.x = Date.now() * 0.0005
