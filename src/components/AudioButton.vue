@@ -1,16 +1,17 @@
 <template>
   <div class="audioButton">
-    <button v-if="!playFlag" @click="onPlay()">PLAY</button>
-    <button class="pauseButton" v-else @click="onPause()">PAUSE</button>
+    <h1>THREE SPIKES</h1>
     <div class="song">
       MUSIC:
       <a
         href="http://youtu.be/VVEssTuPj6g"
         target="_blank"
         rel="noopener noreferrer"
-        >Song: More Plastic x hayve - Feel Alive</a
+        >More Plastic x hayve - Feel Alive</a
       >
     </div>
+    <button v-if="!playFlag" @click="onPlay()">PLAY</button>
+    <button class="pauseButton" v-else @click="onPause()">PAUSE</button>
   </div>
 </template>
 
@@ -48,13 +49,17 @@ export default {
 <style scoped lang="stylus">
 .audioButton {
     position: absolute;
-    top: 90%;
+    top: 85%;
     left: 5%;
+
+    h1{
+      color: white;
+    }
 
     .song{
       color: white;
       font-size: 0.6em;
-      margin-top: 3px;
+      margin-bottom: 1em;
       a{
         color: inherit;
       }
