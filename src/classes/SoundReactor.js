@@ -14,9 +14,8 @@ class SoundReactor {
 
   init() {
     this.ctx = new AudioContext()
+    this.source = this.ctx.createBufferSource()
     this.audio = new Audio(this.url)
-    this.gainNode = this.ctx.createGain()
-    this.gainNode.gain.value = 0.5 //音量
     this.audioSource = this.ctx.createMediaElementSource(this.audio)
     this.analyser = this.ctx.createAnalyser()
     this.analyser.smoothingTimeConstant = 0.8
@@ -49,7 +48,5 @@ class SoundReactor {
   }
 }
 
-const _instance = new SoundReactor(
-  "assets/More Plastic x hayve - Feel Alive [NCS Release].mp3"
-)
+const _instance = new SoundReactor("assets/More-Plastic-x-hayve-Feel-Alive.mp3")
 export default _instance

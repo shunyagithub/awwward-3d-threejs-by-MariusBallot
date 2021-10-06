@@ -1,6 +1,6 @@
 <template>
   <div class="audioButton">
-    <h1>THREE SPIKES</h1>
+    <h1>THREE SPIKES - Sound Reactor</h1>
     <div class="song">
       MUSIC:
       <a
@@ -10,7 +10,7 @@
         >More Plastic x hayve - Feel Alive</a
       >
     </div>
-    <button v-if="!playFlag" @click="onPlay()">PLAY</button>
+    <button v-if="!playFlag" @click="onPlay()">PLAY MUSIC</button>
     <button class="pauseButton" v-else @click="onPause()">PAUSE</button>
   </div>
 </template>
@@ -71,7 +71,7 @@ export default {
         border 1px solid #fff;
         background: rgba(30, 30, 30, 5%);
         padding: 10px;
-        width: 80px;
+        width: 120px;
         color: white;
         transition: background .1s ease-in-out;
 
