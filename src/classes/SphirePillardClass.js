@@ -5,6 +5,7 @@ import MyGUI from "../utils/MyGUI"
 import SoundReactor from "./SoundReactor"
 
 import LoadingController from "./LoadingController"
+import { Vector3 } from "three"
 
 class SphirePillardClass {
   constructor() {
@@ -142,9 +143,10 @@ class SphirePillardClass {
         i++
       }
       const range = 50
-      this.sphere.scale.x = SoundReactor.fdata[range] / 255
-      this.sphere.scale.y = SoundReactor.fdata[range] / 255
-      this.sphere.scale.z = SoundReactor.fdata[range] / 255
+      const fData = SoundReactor.fdata[range] / 255
+      const fDataP = SoundReactor.fdata[range + 10] / 255 + 0.5
+      this.sphere.scale.set(fData, fData, fData)
+      this.pillards.scale.set(fDataP, fDataP, fDataP)
     } else {
       let i = 0
       while (i < this.pillards.children.length) {
@@ -155,12 +157,14 @@ class SphirePillardClass {
           ) + 1
         i++
       }
-      this.sphere.scale.x = this.sphere.scale.y = this.sphere.scale.z = 1
+      if (this.sphere && this.pillards) {
+        this.sphere.scale.set(1, 1, 1)
+        this.pillards.scale.set(1, 1, 1)
+      }
     }
 
-    this.pillards.rotation.x = Date.now() * 0.0005
-    this.pillards.rotation.y = Date.now() * 0.0005
-    this.pillards.rotation.z = Date.now() * 0.0005
+    const rotationSp = Date.now() * 0.0005
+    this.pillards.rotation.set(rotationSp, rotationSp, rotationSp)
   }
   bind() {
     this.computePositions = this.computePositions.bind(this)

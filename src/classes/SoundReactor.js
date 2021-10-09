@@ -20,10 +20,15 @@ class SoundReactor {
     this.analyser = this.ctx.createAnalyser()
     this.analyser.smoothingTimeConstant = 0.8
 
+    this.gainNode = this.ctx.createGain()
+    this.source.connect(this.gainNode)
+    this.gainNode.connect(this.ctx.destination)
+    this.gainNode.gain.value = 0.01
+
     this.audioSource.connect(this.analyser)
     this.audioSource.connect(this.ctx.destination)
     this.fdata = new Uint8Array(this.analyser.frequencyBinCount)
-    // this.audio.currentTime = 20 //音楽の始まる位置
+    this.audio.currentTime = 1 //音楽の始まる位置
   }
 
   play() {
@@ -48,5 +53,7 @@ class SoundReactor {
   }
 }
 
-const _instance = new SoundReactor("assets/More-Plastic-x-hayve-Feel-Alive.mp3")
+const _instance = new SoundReactor(
+  "/assets/THYKIER - Shimmer [NCS Release].mp3"
+)
 export default _instance

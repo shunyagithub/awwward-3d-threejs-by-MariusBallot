@@ -7,10 +7,11 @@ import config from "../utils/config"
 import MyGUI from "../utils/MyGUI"
 
 import SphirePillard from "./SphirePillardClass"
-import Floor from "./FloorClass"
+// import Floor from "./FloorClass"
 import Spec from "./SpecClass"
 import Particle from "./ParticleClass"
 import CamParallax from "./CamParallaxClass"
+import Tube from "./TubeClass"
 
 import simpleFrag from "../shaders/simple.frag"
 import simpleVert from "../shaders/simple.vert"
@@ -46,7 +47,7 @@ class MainThreeScene {
       0.1,
       1000
     )
-    this.camera.position.set(0, 0, 6)
+    this.camera.position.set(0, 0, 8)
     this.controls = new OrbitControls(this.camera, this.renderer.domElement)
     // this.controls.enabled = config.controls
     this.controls.enabled = false
@@ -65,9 +66,10 @@ class MainThreeScene {
     // this.scene.add(cube)
 
     SphirePillard.init(this.scene)
-    Floor.init(this.scene)
+    // Floor.init(this.scene)
     Spec.init(this.scene)
     Particle.init(this.scene)
+    Tube.init(this.scene)
 
     MyGUI.hide()
     if (config.myGui) MyGUI.show()

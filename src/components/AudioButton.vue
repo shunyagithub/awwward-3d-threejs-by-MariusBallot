@@ -4,10 +4,10 @@
     <div class="song">
       MUSIC:
       <a
-        href="http://youtu.be/VVEssTuPj6g"
+        href="http://youtu.be/YM6maFBts_s"
         target="_blank"
         rel="noopener noreferrer"
-        >More Plastic x hayve - Feel Alive</a
+        >THYKIER - Shimmer</a
       >
     </div>
     <button v-if="!playFlag" @click="onPlay()">PLAY MUSIC</button>

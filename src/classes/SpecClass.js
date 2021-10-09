@@ -5,6 +5,8 @@ import MyGUI from "../utils/MyGUI"
 import specFrag from "../shaders/spec.frag"
 import specVert from "../shaders/spec.vert"
 
+import SoundReactor from "./SoundReactor"
+
 import LoadingController from "./LoadingController"
 
 class SpecClass {
@@ -12,14 +14,13 @@ class SpecClass {
     this.bind()
     this.modelLoader = new GLTFLoader(LoadingController)
     this.textureLoader = new THREE.TextureLoader(LoadingController)
+    this.waveColor = {
+      color: "#454545",
+    }
   }
 
   init(scene) {
     this.scene = scene
-
-    const waveColor = {
-      color: "#15dddd",
-    }
 
     this.uniforms = {
       uMatCap: {
@@ -29,7 +30,7 @@ class SpecClass {
         value: 0.25,
       },
       uWaveBorder: {
-        value: 0.1,
+        value: 0.3,
       },
       uWaveStep: {
         value: 3,
@@ -41,7 +42,7 @@ class SpecClass {
         value: 0.7,
       },
       uBorderColor: {
-        value: new THREE.Color(waveColor.color),
+        value: new THREE.Color(this.waveColor.color),
       },
       uTime: {
         value: 0,
@@ -58,9 +59,11 @@ class SpecClass {
     shaderFolder.add(this.uniforms.uWaveStep, "value", 0, 10).name("uWaveStep")
     shaderFolder.add(this.uniforms.uWaveSpeed, "value", 0, 1).name("uWaveSpeed")
     shaderFolder
-      .addColor(waveColor, "color")
+      .addColor(this.waveColor, "color")
       .name("uWaveColor")
-      .onChange(() => this.uniforms.uBorderColor.value.set(waveColor.color))
+      .onChange(() =>
+        this.uniforms.uBorderColor.value.set(this.waveColor.color)
+      )
 
     this.shaderMat = new THREE.ShaderMaterial({
       fragmentShader: specFrag,
@@ -80,7 +83,17 @@ class SpecClass {
   }
 
   update() {
-    this.uniforms.uTime.value += 1
+    if (SoundReactor.playFlag) {
+      //change spectrum color by soundreactor
+      const range = 20
+      const fData = SoundReactor.fdata[range] / 255
+      this.waveColor.color = new THREE.Color(0.5, 0.8, fData)
+
+      this.uniforms.uBorderColor.value.set(this.waveColor.color)
+      this.uniforms.uTime.value += 1
+    } else {
+      this.uniforms.uTime.value += 1
+    }
   }
 
   bind() {}
