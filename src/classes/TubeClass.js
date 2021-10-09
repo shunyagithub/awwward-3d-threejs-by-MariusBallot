@@ -22,7 +22,7 @@ class TubeClass {
       splines: this.splines.KnotCurve,
       tubularSegments: 30,
       radius: 9,
-      radiusSegments: 30,
+      radiusSegments: 100,
     }
     this.clock = new THREE.Clock()
   }

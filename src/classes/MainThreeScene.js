@@ -1,6 +1,6 @@
 import * as THREE from "three"
 
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
+// import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
 
 import RAF from "../utils/RAF"
 import config from "../utils/config"
@@ -10,11 +10,11 @@ import SphirePillard from "./SphirePillardClass"
 // import Floor from "./FloorClass"
 import Spec from "./SpecClass"
 import Particle from "./ParticleClass"
-import CamParallax from "./CamParallaxClass"
+// import CamParallax from "./CamParallaxClass"
 import Tube from "./TubeClass"
 
-import simpleFrag from "../shaders/simple.frag"
-import simpleVert from "../shaders/simple.vert"
+// import simpleFrag from "../shaders/simple.frag"
+// import simpleVert from "../shaders/simple.vert"
 
 class MainThreeScene {
   constructor() {
@@ -52,7 +52,7 @@ class MainThreeScene {
       0.1,
       1000
     )
-    this.camera.position.set(0, 1, 10)
+    this.camera.position.set(0, 0, 8)
     this.parent.add(this.camera)
     // this.controls = new OrbitControls(this.camera, this.renderer.domElement)
     // // this.controls.enabled = config.controls
@@ -79,6 +79,7 @@ class MainThreeScene {
 
     MyGUI.hide()
     if (config.myGui) MyGUI.show()
+    MyGUI.closed = true
 
     // const camFolder = MyGUI.addFolder("Camera Folder")
     // camFolder.open()

@@ -16,7 +16,7 @@ uniform float uTime;
 
 void main() {
 
-    float n3 = snoise3(vec3(vPosition.xy*10., uTime*0.5))*uWaveNoise;
+    float n3 = snoise3(vec3(vPosition.xy*10. * vUv.y, uTime*0.5))*uWaveNoise;
 
     float w = sin(vPosition.y*uWaveStep + -uTime*uWaveSpeed);
 
@@ -29,9 +29,9 @@ void main() {
     vec4 matCap = texture2D(uMatCap, vMatCapUV);
     vec4 matCapOut = vec4(matCap.rgb, mcMask);
 
-    float opMask = 0. - vPosition.y;
+    float opMask = 0. - vPosition.x;
     opMask *= .15;
-    opMask += .5;
+    opMask += .3;
     vec4 opMaskOut = vec4(1., 1., 1., opMask);
 
     vec4 col = matCapOut+borderOut;

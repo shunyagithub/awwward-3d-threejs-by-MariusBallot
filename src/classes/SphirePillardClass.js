@@ -14,8 +14,8 @@ class SphirePillardClass {
     this.textureLoader = new THREE.TextureLoader(LoadingController)
     this.params = {
       waveSpeed: 1,
-      subDiv: 3,
-      pillardSize: 0.2,
+      subDiv: 2,
+      pillardSize: 0.25,
     }
   }
 
@@ -143,8 +143,8 @@ class SphirePillardClass {
         i++
       }
       const range = 50
-      const fData = SoundReactor.fdata[range] / 255
-      const fDataP = SoundReactor.fdata[range + 10] / 255 + 0.5
+      const fData = SoundReactor.fdata[range] / 255 + 0.5
+      const fDataP = SoundReactor.fdata[range + 10] / 255 + 1
       this.sphere.scale.set(fData, fData, fData)
       this.pillards.scale.set(fDataP, fDataP, fDataP)
     } else {

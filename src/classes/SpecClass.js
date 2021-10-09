@@ -75,7 +75,7 @@ class SpecClass {
     this.modelLoader.load("./assets/models/spec.glb", (glb) => {
       glb.scene.traverse((child) => {
         if (child instanceof THREE.Mesh) child.material = this.shaderMat
-        child.scale.multiplyScalar(1.7)
+        child.scale.multiplyScalar(1.5)
         child.position.y = -1
       })
       this.scene.add(glb.scene)
@@ -87,7 +87,7 @@ class SpecClass {
       //change spectrum color by soundreactor
       const range = 20
       const fData = SoundReactor.fdata[range] / 255
-      this.waveColor.color = new THREE.Color(0.5, 0.8, fData)
+      this.waveColor.color = new THREE.Color(0.5, 0.8, fData + 0.2)
 
       this.uniforms.uBorderColor.value.set(this.waveColor.color)
       this.uniforms.uTime.value += 1
