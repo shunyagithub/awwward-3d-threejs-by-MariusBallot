@@ -24,16 +24,16 @@ class SpecClass {
 
     this.uniforms = {
       uMatCap: {
-        value: this.textureLoader.load("assets/textures/1.png"),
+        value: this.textureLoader.load("assets/textures/2.png"),
       },
       uSpecSize: {
         value: 0.25,
       },
       uWaveBorder: {
-        value: 0.3,
+        value: 0.5,
       },
       uWaveStep: {
-        value: 3,
+        value: 5,
       },
       uWaveSpeed: {
         value: 0.25,

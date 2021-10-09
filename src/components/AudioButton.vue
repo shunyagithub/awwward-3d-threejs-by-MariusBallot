@@ -49,15 +49,19 @@ export default {
 <style scoped lang="stylus">
 .audioButton {
     position: absolute;
-    top: 85%;
+    top: 80%;
     left: 5%;
 
+    padding: 20px;
+    background: rgba(30, 30, 30, 30%);
+    border-radius: 5px;
+
     h1{
-      color: white;
+      color: #fff;
     }
 
     .song{
-      color: white;
+      color: #fff;
       font-size: 0.6em;
       margin-bottom: 1em;
       a{
@@ -72,7 +76,7 @@ export default {
         background: rgba(30, 30, 30, 5%);
         padding: 10px;
         width: 120px;
-        color: white;
+        color: #fff;
         transition: background .1s ease-in-out;
 
         &:hover{

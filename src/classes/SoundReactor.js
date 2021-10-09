@@ -20,10 +20,10 @@ class SoundReactor {
     this.analyser = this.ctx.createAnalyser()
     this.analyser.smoothingTimeConstant = 0.8
 
-    this.gainNode = this.ctx.createGain()
-    this.source.connect(this.gainNode)
-    this.gainNode.connect(this.ctx.destination)
-    this.gainNode.gain.value = 0.01
+    // this.gainNode = this.ctx.createGain()
+    // this.source.connect(this.gainNode)
+    // this.gainNode.connect(this.ctx.destination)
+    // this.gainNode.gain.value = 0.01
 
     this.audioSource.connect(this.analyser)
     this.audioSource.connect(this.ctx.destination)
